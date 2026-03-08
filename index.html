@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayass BioScience - Wikipedia</title>
+<style>
+/* === Wikipedia Faithful CSS Reset & Theme === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #202122;
+  background: #f8f9fa;
+}
+
+/* === Top Chrome Bar === */
+.wiki-top-bar {
+  background: #fff;
+  border-bottom: 1px solid #a7d7f9;
+  padding: 0;
+}
+.wiki-top-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 6px 20px;
+}
+.wiki-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #202122;
+  margin-right: 30px;
+}
+.wiki-logo-img {
+  width: 40px;
+  height: 40px;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #202122;
+  border: 1px solid #c8ccd1;
+}
+.wiki-logo-text {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+.wiki-logo-text span {
+  font-size: 12px;
+  color: #54595d;
+  display: block;
+  font-family: sans-serif;
+  letter-spacing: 0;
+}
+.wiki-search {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+}
+.wiki-search input {
+  width: 100%;
+  padding: 6px 12px 6px 32px;
+  border: 1px solid #a2a9b1;
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: sans-serif;
+  background: #fff;
+}
+.wiki-search::before {
+  content: "🔍";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+/* === Tabs === */
+.wiki-tabs {
+  background: #fff;
+  border-bottom: 1px solid #a7d7f9;
+}
+.wiki-tabs-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 0;
+}
+.wiki-tab {
+  padding: 8px 14px;
+  font-family: sans-serif;
+  font-size: 12.5px;
+  color: #0645ad;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+}
+.wiki-tab:hover {
+  text-decoration: underline;
+}
+.wiki-tab.active {
+  color: #202122;
+  font-weight: bold;
+  border-bottom-color: #36c;
+  background: #fff;
+}
+
+/* === Main Content Area === */
+.wiki-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  background: #fff;
+  border: 1px solid #a7d7f9;
+  border-top: none;
+  min-height: 100vh;
+}
+.wiki-content {
+  flex: 1;
+  padding: 20px 24px 40px 24px;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* === Article Title === */
+.wiki-title {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 28.8px;
+  font-weight: normal;
+  line-height: 1.2;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+}
+
+/* === Short Description === */
+.short-description {
+  font-family: sans-serif;
+  font-size: 13px;
+  color: #54595d;
+  font-style: italic;
+  margin-bottom: 12px;
+  padding: 4px 8px;
+  background: #f8f9fa;
+  border-left: 3px solid #a2a9b1;
+}
+
+/* === Infobox === */
+.infobox {
+  float: right;
+  clear: right;
+  margin: 0 0 16px 20px;
+  width: 300px;
+  border: 1px solid #a2a9b1;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  font-size: 12.8px;
+  line-height: 1.5;
+  background: #f8f9fa;
+}
+.infobox caption,
+.infobox-title {
+  background: #002147;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 10px;
+  font-family: sans-serif;
+}
+.infobox-subtitle {
+  background: #002147;
+  color: #d4e4f7;
+  font-size: 12px;
+  text-align: center;
+  padding: 0 10px 8px;
+  font-style: italic;
+  font-family: sans-serif;
+}
+.infobox-logo {
+  background: #fff;
+  text-align: center;
+  padding: 16px 10px;
+  border-bottom: 1px solid #a2a9b1;
+}
+.infobox-logo-text {
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #002147;
+}
+.infobox-logo-text .bio {
+  color: #1a73a7;
+}
+.infobox-logo-tagline {
+  font-size: 10px;
+  color: #54595d;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.infobox th {
+  text-align: left;
+  vertical-align: top;
+  padding: 4px 8px;
+  background: #e8ecf1;
+  border: 1px solid #a2a9b1;
+  font-weight: bold;
+  white-space: nowrap;
+  width: 100px;
+  color: #202122;
+}
+.infobox td {
+  vertical-align: top;
+  padding: 4px 8px;
+  border: 1px solid #a2a9b1;
+  background: #fff;
+}
+.infobox a {
+  color: #0645ad;
+  text-decoration: none;
+}
+.infobox a:hover {
+  text-decoration: underline;
+}
+
+/* === Section Headings === */
+.wiki-content h2 {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 22px;
+  font-weight: normal;
+  border-bottom: 1px solid #a2a9b1;
+  margin: 24px 0 8px 0;
+  padding-bottom: 4px;
+  clear: both;
+}
+.wiki-content h3 {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 17px;
+  font-weight: bold;
+  margin: 18px 0 6px 0;
+}
+.wiki-content h4 {
+  font-family: 'Linux Libertine', 'Georgia', serif;
+  font-size: 14.5px;
+  font-weight: bold;
+  margin: 14px 0 4px 0;
+}
+
+/* === Paragraphs & Text === */
+.wiki-content p {
+  margin: 6px 0 10px 0;
+}
+.wiki-content b, .wiki-content strong {
+  font-weight: bold;
+}
+
+/* === Links === */
+.wiki-content a {
+  color: #0645ad;
+  text-decoration: none;
+}
+.wiki-content a:hover {
+  text-decoration: underline;
+}
+.wiki-content a:visited {
+  color: #0b0080;
+}
+
+/* === Lists === */
+.wiki-content ul, .wiki-content ol {
+  margin: 6px 0 10px 24px;
+}
+.wiki-content li {
+  margin-bottom: 3px;
+}
+
+/* === Table of Contents === */
+.toc {
+  display: inline-block;
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 10px 16px;
+  margin: 8px 0 16px 0;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 400px;
+}
+.toc-title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: toc-counter;
+}
+.toc > ol > li {
+  counter-increment: toc-counter;
+  margin: 2px 0;
+}
+.toc > ol > li::before {
+  content: counter(toc-counter) " ";
+  font-weight: normal;
+}
+.toc ol ol {
+  margin-left: 18px;
+  counter-reset: toc-sub;
+}
+.toc ol ol li {
+  counter-increment: toc-sub;
+  margin: 1px 0;
+}
+.toc ol ol li::before {
+  content: counter(toc-counter) "." counter(toc-sub) " ";
+}
+.toc ol ol ol {
+  margin-left: 18px;
+  counter-reset: toc-subsub;
+}
+.toc ol ol ol li {
+  counter-increment: toc-subsub;
+}
+.toc ol ol ol li::before {
+  content: counter(toc-counter) "." counter(toc-sub) "." counter(toc-subsub) " ";
+}
+.toc a {
+  color: #0645ad;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+
+/* === References === */
+.reflist {
+  font-family: sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  column-count: 1;
+}
+.reflist ol {
+  margin-left: 24px;
+}
+.reflist li {
+  margin-bottom: 4px;
+  padding-left: 4px;
+}
+sup.reference {
+  font-size: 11px;
+  font-family: sans-serif;
+  vertical-align: super;
+  line-height: 0;
+}
+sup.reference a {
+  color: #0645ad;
+  text-decoration: none;
+}
+sup.reference a:hover {
+  text-decoration: underline;
+}
+
+/* === See Also === */
+.see-also-columns {
+  column-count: 2;
+  column-gap: 20px;
+}
+
+/* === External Links === */
+.ext-link::after {
+  content: " ↗";
+  font-size: 10px;
+  color: #36b;
+}
+
+/* === Categories === */
+.catlinks {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 6px 12px;
+  margin-top: 30px;
+  font-family: sans-serif;
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+.catlinks-title {
+  font-weight: bold;
+  margin-right: 6px;
+}
+.catlinks a {
+  color: #0645ad;
+  text-decoration: none;
+  margin-right: 4px;
+}
+.catlinks a:hover {
+  text-decoration: underline;
+}
+.catlinks-sep {
+  color: #a2a9b1;
+  margin: 0 2px;
+}
+
+/* === Footer === */
+.wiki-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #54595d;
+  text-align: center;
+  border-top: 1px solid #a2a9b1;
+}
+.wiki-footer a {
+  color: #0645ad;
+  text-decoration: none;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .infobox {
+    float: none;
+    width: 100%;
+    margin: 0 0 16px 0;
+  }
+  .see-also-columns {
+    column-count: 1;
+  }
+  .wiki-top-bar-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .wiki-search {
+    max-width: 100%;
+  }
+}
+
+/* === Edit Section Brackets === */
+.mw-editsection {
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  margin-left: 8px;
+  vertical-align: baseline;
+}
+.mw-editsection a {
+  color: #0645ad;
+}
+
+/* === Hatnote === */
+.hatnote {
+  font-style: italic;
+  font-family: sans-serif;
+  font-size: 13px;
+  color: #54595d;
+  margin-bottom: 10px;
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+}
+
+/* === Protection icon === */
+.page-info {
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #72777d;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ========== TOP BAR ========== -->
+<div class="wiki-top-bar">
+  <div class="wiki-top-bar-inner">
+    <a class="wiki-logo" href="#">
+      <div class="wiki-logo-img">W</div>
+      <div class="wiki-logo-text">
+        Wikipedia
+        <span>The Free Encyclopedia</span>
+      </div>
+    </a>
+    <div class="wiki-search">
+      <input type="text" placeholder="Search Wikipedia" value="Ayass BioScience" />
+    </div>
+  </div>
+</div>
+
+<!-- ========== TABS ========== -->
+<div class="wiki-tabs">
+  <div class="wiki-tabs-inner">
+    <a class="wiki-tab active">Article</a>
+    <a class="wiki-tab">Talk</a>
+    <a class="wiki-tab">Read</a>
+    <a class="wiki-tab">Edit</a>
+    <a class="wiki-tab">View history</a>
+  </div>
+</div>
+
+<!-- ========== MAIN BODY ========== -->
+<div class="wiki-body">
+  <div class="wiki-content">
+
+    <!-- Page Title -->
+    <h1 class="wiki-title">Ayass BioScience</h1>
+
+    <div class="short-description">American biotechnology company specializing in causal AI for drug discovery</div>
+
+    <div class="page-info">From Wikipedia, the free encyclopedia</div>
+
+    <!-- ========== INFOBOX ========== -->
+    <table class="infobox">
+      <tr><td colspan="2" class="infobox-title">Ayass BioScience, LLC</td></tr>
+      <tr><td colspan="2" class="infobox-subtitle">Intelligent Biology in Motion</td></tr>
+      <tr><td colspan="2" class="infobox-logo">
+        <div class="infobox-logo-text">AYASS <span class="bio">BIO</span>SCIENCE</div>
+        <div class="infobox-logo-tagline">Intelligent Biology in Motion</div>
+      </td></tr>
+      <tr><th>Company type</th><td><a href="https://en.wikipedia.org/wiki/Privately_held_company">Private</a></td></tr>
+      <tr><th>Industry</th><td>
+        <a href="https://en.wikipedia.org/wiki/Biotechnology">Biotechnology</a><br>
+        <a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare">AI in healthcare</a><br>
+        <a href="https://en.wikipedia.org/wiki/Precision_medicine">Precision medicine</a>
+      </td></tr>
+      <tr><th>Founded</th><td>2011<span style="font-size:11px; color:#54595d;"> (15&nbsp;years ago)</span></td></tr>
+      <tr><th>Founder</th><td><a href="#leadership">Mohamad Ammar Ayass, MD, FCCP</a></td></tr>
+      <tr><th>Headquarters</th><td><a href="https://en.wikipedia.org/wiki/Frisco,_Texas">Frisco, Texas</a>, United States</td></tr>
+      <tr><th>Key people</th><td>Mohamad Ammar Ayass<br><small>(<a href="https://en.wikipedia.org/wiki/Chief_executive_officer">CEO</a> &amp; Founder)</small></td></tr>
+      <tr><th>Products</th><td>BiRAGAS platform<br>Clinical laboratory services</td></tr>
+      <tr><th>R&amp;D&nbsp;spend</th><td>$23&nbsp;million (cumulative, self-funded)</td></tr>
+      <tr><th>Website</th><td><a href="https://ayassbioscience.com" class="ext-link">ayassbioscience.com</a></td></tr>
+    </table>
+
+    <!-- ========== LEAD SECTION ========== -->
+    <p>
+      <b>Ayass BioScience, LLC</b> is an American <a href="https://en.wikipedia.org/wiki/Biotechnology">biotechnology</a> company headquartered in <a href="https://en.wikipedia.org/wiki/Frisco,_Texas">Frisco, Texas</a>, that develops <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">artificial intelligence</a>-driven <a href="https://en.wikipedia.org/wiki/Causal_inference">causal inference</a> tools for <a href="https://en.wikipedia.org/wiki/Drug_discovery">drug discovery</a> and <a href="https://en.wikipedia.org/wiki/Biomarker_(medicine)">biomarker</a> development. The company is known for its proprietary <b>BiRAGAS</b> (Biological Retrieval-Augmented Generation Assessment System) platform, a multi-modal <a href="https://en.wikipedia.org/wiki/Agentic_AI">agentic AI</a> system designed to identify causal molecular drivers of disease from <a href="https://en.wikipedia.org/wiki/Multi-omics">multi-omics</a> patient data.<sup class="reference"><a href="#ref1">[1]</a></sup> Ayass BioScience also operates a <a href="https://en.wikipedia.org/wiki/Clinical_Laboratory_Improvement_Amendments">CLIA</a>-certified clinical laboratory that provides <a href="https://en.wikipedia.org/wiki/Transcriptomics">transcriptomic</a> profiling and advanced diagnostic testing services.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+
+    <!-- ========== TABLE OF CONTENTS ========== -->
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#history">History</a>
+          <ol>
+            <li><a href="#academic-partnerships">Academic partnerships</a></li>
+          </ol>
+        </li>
+        <li><a href="#technology">Technology</a>
+          <ol>
+            <li><a href="#biragas-platform">BiRAGAS platform</a></li>
+            <li><a href="#analytical-workflows">Analytical workflows</a></li>
+            <li><a href="#clia-laboratory">CLIA-certified laboratory</a></li>
+          </ol>
+        </li>
+        <li><a href="#products-and-services">Products and services</a>
+          <ol>
+            <li><a href="#licensing-model">Licensing model</a></li>
+            <li><a href="#use-cases">Use cases</a></li>
+          </ol>
+        </li>
+        <li><a href="#therapeutic-focus">Therapeutic focus</a>
+          <ol>
+            <li><a href="#precision-nephrology">Precision nephrology</a></li>
+            <li><a href="#additional-areas">Additional therapeutic areas</a></li>
+          </ol>
+        </li>
+        <li><a href="#regulatory-strategy">Regulatory strategy</a></li>
+        <li><a href="#intellectual-property">Intellectual property</a></li>
+        <li><a href="#business-model">Business model</a></li>
+        <li><a href="#competitive-landscape">Competitive landscape</a></li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="#see-also">See also</a></li>
+        <li><a href="#references">References</a></li>
+        <li><a href="#external-links">External links</a></li>
+      </ol>
+    </div>
+
+    <!-- ========== HISTORY ========== -->
+    <h2 id="history">History <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+
+    <p>
+      Ayass BioScience was founded by Dr. Mohamad Ammar Ayass, a board-certified physician-scientist specializing in <a href="https://en.wikipedia.org/wiki/Pulmonology">pulmonary-critical care medicine</a> and <a href="https://en.wikipedia.org/wiki/Nephrology">nephrology</a>.<sup class="reference"><a href="#ref1">[1]</a></sup> The company was established with the goal of addressing what Ayass described as the "epistemological crisis" in modern <a href="https://en.wikipedia.org/wiki/Bioinformatics">bioinformatics</a> — the reliance on correlational rather than causal evidence in <a href="https://en.wikipedia.org/wiki/Biomarker_discovery">biomarker</a> discovery and <a href="https://en.wikipedia.org/wiki/Drug_development">drug development</a>.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+    <p>
+      Over a period of approximately 15 years, Ayass invested $23&nbsp;million in self-funded <a href="https://en.wikipedia.org/wiki/Research_and_development">research and development</a> to build the BiRAGAS platform and its supporting laboratory infrastructure.<sup class="reference"><a href="#ref1">[1]</a></sup> The company established a <a href="https://en.wikipedia.org/wiki/Clinical_Laboratory_Improvement_Amendments">CLIA</a>-certified laboratory capable of performing clinical transcriptomic profiling, providing a closed-loop system for validating computational discoveries with wet-laboratory experiments on patient samples.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+    <p>
+      By 2025, the company announced that BiRAGAS v1.0 had reached operational status with an active patient data pipeline.<sup class="reference"><a href="#ref1">[1]</a></sup> Ayass BioScience pursued a Series&nbsp;A funding round at a $40–55&nbsp;million <a href="https://en.wikipedia.org/wiki/Pre-money_valuation">pre-money valuation</a> to scale the platform's infrastructure and expand pharmaceutical partnerships.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+
+    <h3 id="academic-partnerships">Academic partnerships <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>
+      Ayass BioScience has established research collaborations with the <a href="https://en.wikipedia.org/wiki/University_of_California,_Irvine">University of California, Irvine</a> (UCI) and the <a href="https://en.wikipedia.org/wiki/University_of_Southern_California">University of Southern California</a> (USC) to provide peer-reviewed scientific validation of BiRAGAS outputs.<sup class="reference"><a href="#ref1">[1]</a></sup> These partnerships facilitate access to patient <a href="https://en.wikipedia.org/wiki/Cohort_study">cohort</a> data and have generated joint publications in refereed journals.<sup class="reference"><a href="#ref1">[1]</a></sup> The company also maintains an active strategic partnership with an undisclosed <a href="https://en.wikipedia.org/wiki/Pharmaceutical_industry">pharmaceutical company</a> for platform validation.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+
+    <!-- ========== TECHNOLOGY ========== -->
+    <h2 id="technology">Technology <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+
+    <h3 id="biragas-platform">BiRAGAS platform <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>
+      BiRAGAS (Biological Retrieval-Augmented Generation Assessment System) is a multi-modal, <a href="https://en.wikipedia.org/wiki/Agentic_AI">agentic AI</a> platform designed to perform molecule-to-molecule <a href="https://en.wikipedia.org/wiki/Causal_inference">causal inference</a> from <a href="https://en.wikipedia.org/wiki/Multi-omics">multi-omics</a> patient data.<sup class="reference"><a href="#ref2">[2]</a></sup> Unlike conventional <a href="https://en.wikipedia.org/wiki/Bioinformatics">bioinformatics</a> tools that identify statistical correlations, BiRAGAS is engineered to infer directed causal relationships between molecular entities — determining whether a specific gene drives changes in another gene, rather than merely correlating with it.<sup class="reference"><a href="#ref2">[2]</a></sup>
+    </p>
+    <p>The platform integrates four primary data modalities:<sup class="reference"><a href="#ref2">[2]</a></sup></p>
+    <ul>
+      <li><b><a href="https://en.wikipedia.org/wiki/Transcriptomics">Transcriptomics</a></b>: Patient cohort <a href="https://en.wikipedia.org/wiki/Gene_expression">expression</a> profiles capturing disease-related regulatory activity</li>
+      <li><b><a href="https://en.wikipedia.org/wiki/Genetics">Genetics</a></b>: <a href="https://en.wikipedia.org/wiki/Genome-wide_association_study">GWAS</a> signals, <a href="https://en.wikipedia.org/wiki/Expression_quantitative_trait_loci">eQTLs</a>, and <a href="https://en.wikipedia.org/wiki/Mendelian_randomization">Mendelian randomization</a> estimates providing causal anchoring</li>
+      <li><b>Perturbation data</b>: <a href="https://en.wikipedia.org/wiki/CRISPR">CRISPR</a> <a href="https://en.wikipedia.org/wiki/Cancer_Dependency_Map">DepMap</a> screens and chemical assays for direct causal hypothesis testing</li>
+      <li><b>Prior knowledge</b>: Curated biological databases including <a href="https://en.wikipedia.org/wiki/Reactome">Reactome</a>, <a href="https://en.wikipedia.org/wiki/KEGG">KEGG</a>, and the <a href="https://en.wikipedia.org/wiki/Gene_Ontology">Gene Ontology</a></li>
+    </ul>
+
+    <h4>Four-layer causal framework</h4>
+    <p>BiRAGAS employs a four-layer causal framework to model biological systems:<sup class="reference"><a href="#ref2">[2]</a></sup></p>
+    <ol>
+      <li><b>Genetic variants</b> (<a href="https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism">SNPs</a>): Fixed biological inputs that anchor causal inference</li>
+      <li><b>Gene expression and regulatory networks</b>: Shaped by genetic variation</li>
+      <li><b>Molecular systems</b>: <a href="https://en.wikipedia.org/wiki/Metabolic_pathway">Pathways</a>, biological processes, and cell-type programs</li>
+      <li><b><a href="https://en.wikipedia.org/wiki/Phenotype">Phenotypes</a> and disease states</b>: Terminal layer of the causal model</li>
+    </ol>
+    <p>
+      The platform uses disease states as cohort identifiers rather than model components, a design choice intended to ensure that discoveries reflect underlying biological mechanisms rather than statistical artifacts.<sup class="reference"><a href="#ref2">[2]</a></sup>
+    </p>
+
+    <h4>Multi-evidence validation</h4>
+    <p>Causal relationships identified by the platform undergo evaluation across four independent validation streams:<sup class="reference"><a href="#ref2">[2]</a></sup></p>
+    <ul>
+      <li><b>Structural discovery</b>: PC, NOTEARS, and FCI algorithms identify candidate causal structures</li>
+      <li><b>Temporal validation</b>: <a href="https://en.wikipedia.org/wiki/Granger_causality">Granger causality</a> verifies that proposed causes precede effects</li>
+      <li><b>Genetic validation</b>: eQTLs and genetic instruments provide natural randomization</li>
+      <li><b>Functional validation</b>: <a href="https://en.wikipedia.org/wiki/CRISPR">CRISPR</a> screens and drug response data directly test causal hypotheses</li>
+    </ul>
+
+    <h4>Causal Confidence Scoring</h4>
+    <p>BiRAGAS assigns a three-tier Causal Confidence Score (CCS) to each identified relationship:<sup class="reference"><a href="#ref2">[2]</a></sup></p>
+    <ul>
+      <li><b>Tier&nbsp;1 – Driver</b>: High-confidence targets with converging multi-modality evidence, suitable for direct therapeutic targeting</li>
+      <li><b>Tier&nbsp;2 – Strong Candidate</b>: Supported by two or more data streams; warrants additional validation</li>
+      <li><b>Tier&nbsp;3 – Candidate</b>: Single-modality evidence; suitable for hypothesis generation</li>
+    </ul>
+
+    <h4>Patient Specificity Index</h4>
+    <p>The platform implements a Patient Specificity Index (PSI) framework to prevent inappropriate extrapolation from population-level findings to individual patients:<sup class="reference"><a href="#ref2">[2]</a></sup></p>
+    <ul>
+      <li><b>Level&nbsp;1 (Population)</b>: N&nbsp;&ge;&nbsp;50; Average Treatment Effect; PSI&nbsp;=&nbsp;0.0</li>
+      <li><b>Level&nbsp;2 (Subgroup)</b>: 10&nbsp;&le;&nbsp;N&nbsp;&lt;&nbsp;50; Conditional effects; PSI&nbsp;=&nbsp;0–1.0</li>
+      <li><b>Level&nbsp;3 (Individual)</b>: N&nbsp;&lt;&nbsp;10; Individual Treatment Effect; PSI&nbsp;=&nbsp;1.0</li>
+    </ul>
+
+    <h4>Hallucination mitigation</h4>
+    <p>
+      BiRAGAS incorporates a multi-agent <a href="https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)">hallucination</a> mitigation architecture and a proprietary <a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">retrieval-augmented generation</a> (RAG) system backed by a database of 8.6&nbsp;million biological vectors.<sup class="reference"><a href="#ref1">[1]</a></sup> This Bio-RAG system is designed to ground AI-generated outputs in validated biological knowledge, reducing the risk of biologically implausible inferences.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+
+    <h3 id="analytical-workflows">Analytical workflows <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>The platform offers seven analytical workflows for translational research:<sup class="reference"><a href="#ref3">[3]</a></sup></p>
+    <ul>
+      <li><b>WF-1: Causal Discovery</b> — Identifies novel disease drivers from multi-modal data, producing ranked gene lists, CCS scores, validated causal graphs, and evidence dossiers</li>
+      <li><b>WF-2: Directed Causality</b> — Tests specific causal hypotheses with edge evidence cards, effect estimates, and confidence metrics</li>
+      <li><b>WF-3: Intervention Ranking</b> — Ranks therapeutic targets using signature reversal scoring and <a href="https://en.wikipedia.org/wiki/Dose%E2%80%93response_relationship">dose-response</a> modeling</li>
+      <li><b>WF-4: Comparative Causality</b> — Compares causal mechanisms across patient subgroups</li>
+      <li><b>WF-5: Counterfactual Analysis</b> — Models predicted effects of unseen perturbations</li>
+      <li><b>WF-6: Evidence Inspection</b> — Provides transparency into causal claims through evidence breakdowns and provenance reports</li>
+      <li><b>WF-7: Integrated Analysis</b> — End-to-end workflow combining all modules</li>
+    </ul>
+
+    <h3 id="clia-laboratory">CLIA-certified laboratory <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>
+      Ayass BioScience operates a <a href="https://en.wikipedia.org/wiki/Clinical_Laboratory_Improvement_Amendments">CLIA</a>-certified clinical laboratory that provides advanced transcriptomic profiling and diagnostic testing services.<sup class="reference"><a href="#ref1">[1]</a></sup> The laboratory serves as both a revenue-generating clinical services division and a closed-loop validation system where computational discoveries made by the BiRAGAS platform can be tested against real patient samples.<sup class="reference"><a href="#ref1">[1]</a></sup> The integration of computational and wet-laboratory capabilities distinguishes Ayass BioScience from computation-only AI drug discovery companies that rely on external <a href="https://en.wikipedia.org/wiki/Contract_research_organization">contract research organizations</a> (CROs) for experimental validation.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+
+    <!-- ========== PRODUCTS AND SERVICES ========== -->
+    <h2 id="products-and-services">Products and services <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+
+    <h3 id="licensing-model">Licensing model <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>Ayass BioScience offers BiRAGAS through a modular licensing model, available as either a full enterprise platform or as individually licensed capability modules:<sup class="reference"><a href="#ref4">[4]</a></sup></p>
+    <ul>
+      <li><b>Causal Engine</b> — Establishes mechanistic disease drivers with validated causal graphs</li>
+      <li><b>CRISPR Suite</b> — Perturbation intelligence across screening and targeted editing</li>
+      <li><b>Drug Agent</b> — Translates targets into a therapeutic landscape across 8.6&nbsp;million biological vectors</li>
+      <li><b>BiRAGAS Toolkit</b> — <a href="https://en.wikipedia.org/wiki/Genomics">Genomics</a>/transcriptomics platform for data acquisition and analysis</li>
+      <li><b>Full Platform</b> — All modules integrated as an enterprise deployment</li>
+    </ul>
+    <p>
+      Enterprise deployments include white-label deployment options, proprietary data integration with isolated knowledge bases, custom knowledge base development, and dedicated scientific partnership support.<sup class="reference"><a href="#ref4">[4]</a></sup>
+    </p>
+
+    <h3 id="use-cases">Use cases <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>BiRAGAS is designed for three primary applications in <a href="https://en.wikipedia.org/wiki/Drug_development">drug development</a> and <a href="https://en.wikipedia.org/wiki/Clinical_trial">clinical trial</a> design:<sup class="reference"><a href="#ref5">[5]</a></sup></p>
+    <ul>
+      <li><b>Target identification</b>: Identifying upstream causal drivers of disease using multi-omic integration and mechanistic confidence scoring, with the aim of reducing late-stage clinical trial failure</li>
+      <li><b>Trial enrichment</b>: Stratifying molecular subtypes and identifying responder-enriched <a href="https://en.wikipedia.org/wiki/Cohort_study">cohorts</a> to establish biomarker-informed inclusion criteria for clinical trials</li>
+      <li><b><a href="https://en.wikipedia.org/wiki/Drug_repositioning">Drug repositioning</a></b>: Mapping existing drug mechanisms to validated causal pathways to identify cross-disease molecular alignment for repurposing candidates</li>
+    </ul>
+
+    <!-- ========== THERAPEUTIC FOCUS ========== -->
+    <h2 id="therapeutic-focus">Therapeutic focus <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+
+    <h3 id="precision-nephrology">Precision nephrology <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>
+      Ayass BioScience has identified precision nephrology as its primary commercial beachhead, focusing on three molecular phenotypes where the company claims significant unmet need exists:<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Focal_segmental_glomerulosclerosis">Focal segmental glomerulosclerosis</a> (FSGS)</li>
+      <li><a href="https://en.wikipedia.org/wiki/IgA_nephropathy">IgA nephropathy</a></li>
+      <li>Related kidney disease subtypes requiring molecular-level patient stratification</li>
+    </ul>
+    <p>
+      The company has stated that BiRAGAS-derived <a href="https://en.wikipedia.org/wiki/Companion_diagnostic">companion diagnostic</a> (CDx) products targeting these conditions may qualify for <a href="https://en.wikipedia.org/wiki/Breakthrough_therapy">Breakthrough Device Designation</a> from the <a href="https://en.wikipedia.org/wiki/Food_and_Drug_Administration">Food and Drug Administration</a> (FDA), potentially accelerating regulatory review timelines.<sup class="reference"><a href="#ref1">[1]</a></sup> The company has projected a $3.4&nbsp;billion addressable market in precision nephrology alone.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+
+    <h3 id="additional-areas">Additional therapeutic areas <span class="mw-editsection">[<a href="#">edit</a>]</span></h3>
+    <p>
+      The platform addresses applications spanning <a href="https://en.wikipedia.org/wiki/Oncology">oncology</a> to <a href="https://en.wikipedia.org/wiki/Autoimmune_disease">autoimmune diseases</a>, supporting decisions across discovery and clinical development.<sup class="reference"><a href="#ref5">[5]</a></sup>
+    </p>
+
+    <!-- ========== REGULATORY STRATEGY ========== -->
+    <h2 id="regulatory-strategy">Regulatory strategy <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <p>
+      Ayass BioScience has designed BiRAGAS to align with the FDA's increasing requirements for mechanistic — rather than merely associative — evidence in <a href="https://en.wikipedia.org/wiki/Biomarker_(medicine)">biomarker</a> qualification submissions.<sup class="reference"><a href="#ref1">[1]</a></sup> Since 2019, the FDA has increasingly required mechanistic biological rationale for new biomarker qualifications under the Biomarker Qualification Program (BQP).<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+    <p>The company's regulatory pathway strategy encompasses:<sup class="reference"><a href="#ref1">[1]</a></sup></p>
+    <ul>
+      <li><b>Biomarker Qualification Program (BQP)</b>: BiRAGAS outputs — including mechanistic causal <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">directed acyclic graphs</a> (DAGs) with confidence scores — are designed to map directly onto FDA BQP submission requirements</li>
+      <li><b>Companion diagnostic co-development</b>: The platform's Comparative and Counterfactual modules are engineered to generate patient stratification evidence supporting CDx co-approval under <a href="https://en.wikipedia.org/wiki/Code_of_Federal_Regulations">21 CFR 809.40</a></li>
+      <li><b>Breakthrough Device Designation</b>: BiRAGAS-derived CDx products targeting serious conditions with no approved alternatives may qualify for expedited regulatory review</li>
+      <li><b><a href="https://en.wikipedia.org/wiki/510(k)">510(k)</a> vs. <a href="https://en.wikipedia.org/wiki/Premarket_approval">PMA</a> pathway</b>: The company plans pre-submission meetings with the FDA to determine the optimal regulatory pathway for each specific CDx application</li>
+    </ul>
+
+    <!-- ========== INTELLECTUAL PROPERTY ========== -->
+    <h2 id="intellectual-property">Intellectual property <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <p>Ayass BioScience maintains a multi-layered <a href="https://en.wikipedia.org/wiki/Intellectual_property">intellectual property</a> strategy:<sup class="reference"><a href="#ref1">[1]</a></sup></p>
+    <ul>
+      <li><b>Algorithmic patents</b>: The company is filing <a href="https://en.wikipedia.org/wiki/Utility_patent">utility patents</a> covering the causal inference pipeline, including the combination of <a href="https://en.wikipedia.org/wiki/Bayesian_network">Bayesian</a> <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">DAG</a> construction, PSI Framework scoring, and confidence-gated output architecture</li>
+      <li><b>Proprietary biological vector database</b>: The 8.6&nbsp;million biological vectors curated for the RAG system represent both a <a href="https://en.wikipedia.org/wiki/Trade_secret">trade secret</a> (curation methodology) and a data moat</li>
+      <li><b>Biomarker discovery IP</b>: Each validated biomarker panel discovered using BiRAGAS generates independent intellectual property — specific gene combinations, protein combinations, or molecular signatures that define patient subgroups</li>
+      <li><b>CLIA laboratory operational know-how</b>: Clinical workflows, quality management systems, and sample processing protocols constitute proprietary operational IP</li>
+      <li><b>Trade secret protection</b>: The multi-agent orchestration architecture, confidence scoring calibration methodology, and training data curation pipeline are maintained as trade secrets</li>
+    </ul>
+
+    <!-- ========== BUSINESS MODEL ========== -->
+    <h2 id="business-model">Business model <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <p>Ayass BioScience operates a diversified revenue model that balances near-term clinical laboratory services revenue with scalable technology licensing:<sup class="reference"><a href="#ref1">[1]</a></sup></p>
+    <ul>
+      <li><b>Platform licensing and SaaS revenue</b>: Annual subscription or per-analysis licensing fees for BiRAGAS access</li>
+      <li><b>Pharmaceutical co-development agreements</b>: Milestone payments and royalties from partnerships with pharmaceutical companies</li>
+      <li><b>Companion diagnostic licensing</b>: Revenue from licensing validated biomarker panels to diagnostics companies</li>
+      <li><b>Clinical laboratory services</b>: Revenue from the CLIA-certified laboratory's transcriptomic profiling and testing services</li>
+      <li><b>Biomarker IP licensing</b>: Royalty streams from licensing validated mechanistic biomarker intellectual property</li>
+      <li><b>Regulatory dossier generation</b>: Automated FDA submission document generation as a service offering</li>
+      <li><b>Academic platform access</b>: Reduced-rate licensing for qualifying academic institutions</li>
+    </ul>
+    <p>
+      The AI drug discovery market is projected to grow from $1.4&nbsp;billion to $9.7&nbsp;billion by 2030.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+
+    <!-- ========== COMPETITIVE LANDSCAPE ========== -->
+    <h2 id="competitive-landscape">Competitive landscape <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <p>
+      Ayass BioScience positions BiRAGAS as distinct from both conventional <a href="https://en.wikipedia.org/wiki/Bioinformatics">bioinformatics</a> platforms and adjacent AI drug discovery companies.<sup class="reference"><a href="#ref1">[1]</a></sup> The company contends that no current market participant has assembled an equivalent full-stack capability combining causal inference, hallucination mitigation, FDA-aligned companion diagnostic output, and CLIA laboratory integration.<sup class="reference"><a href="#ref1">[1]</a></sup>
+    </p>
+    <p>The company identifies several factors as barriers to replication:<sup class="reference"><a href="#ref1">[1]</a></sup></p>
+    <ul>
+      <li>15 years of accumulated domain knowledge in both clinical medicine and computational biology</li>
+      <li>The proprietary 8.6&nbsp;million biological vector database requiring years of expert curation</li>
+      <li>Integrated CLIA-certified laboratory infrastructure</li>
+      <li>Architecture designed specifically for FDA-aligned mechanistic evidence production</li>
+      <li>$23&nbsp;million and 15 years of cumulative investment to reach operational status</li>
+    </ul>
+
+    <!-- ========== LEADERSHIP ========== -->
+    <h2 id="leadership">Leadership <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <ul>
+      <li><b>Dr. Mohamad Ammar Ayass, MD, FCCP</b> — Founder and <a href="https://en.wikipedia.org/wiki/Chief_executive_officer">CEO</a>. Board-certified physician-scientist in <a href="https://en.wikipedia.org/wiki/Pulmonology">pulmonary-critical care medicine</a> and <a href="https://en.wikipedia.org/wiki/Nephrology">nephrology</a> with dual expertise in clinical medicine and <a href="https://en.wikipedia.org/wiki/Computational_biology">computational biology</a>.<sup class="reference"><a href="#ref1">[1]</a></sup> Dr. Ayass maintains an active clinical practice while leading the company's research and platform development efforts. His combined background in bedside medicine and AI platform engineering is cited as the foundational domain expertise embedded in the BiRAGAS architecture.<sup class="reference"><a href="#ref1">[1]</a></sup></li>
+    </ul>
+
+    <!-- ========== SEE ALSO ========== -->
+    <h2 id="see-also">See also <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <div class="see-also-columns">
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare">Artificial intelligence in healthcare</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Causal_inference">Causal inference</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Companion_diagnostic">Companion diagnostic</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Drug_discovery">Drug discovery</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Multi-omics">Multi-omics</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Precision_medicine">Precision medicine</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Retrieval-augmented_generation">Retrieval-augmented generation</a></li>
+      </ul>
+    </div>
+
+    <!-- ========== REFERENCES ========== -->
+    <h2 id="references">References <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <div class="reflist">
+      <ol>
+        <li id="ref1">
+          <b>^</b> <cite>"Investor Due Diligence Q&amp;A: BiRAGAS Platform" (v7). Ayass BioScience, LLC. 2026. <i>Confidential investor document.</i></cite>
+        </li>
+        <li id="ref2">
+          <b>^</b> <cite><a href="https://ayassbiosciencetest.com/platform" class="ext-link">"BiRAGAS Platform"</a>. Ayass BioScience, LLC. Retrieved 2026.</cite>
+        </li>
+        <li id="ref3">
+          <b>^</b> <cite><a href="https://ayassbiosciencetest.com/solutions" class="ext-link">"Solutions"</a>. Ayass BioScience, LLC. Retrieved 2026.</cite>
+        </li>
+        <li id="ref4">
+          <b>^</b> <cite><a href="https://ayassbiosciencetest.com/licensing" class="ext-link">"Licensing"</a>. Ayass BioScience, LLC. Retrieved 2026.</cite>
+        </li>
+        <li id="ref5">
+          <b>^</b> <cite><a href="https://ayassbiosciencetest.com/use-cases" class="ext-link">"Use Cases"</a>. Ayass BioScience, LLC. Retrieved 2026.</cite>
+        </li>
+        <li id="ref6">
+          <b>^</b> <cite><a href="https://ayassbiosciencetest.com/partners" class="ext-link">"Partners"</a>. Ayass BioScience, LLC. Retrieved 2026.</cite>
+        </li>
+      </ol>
+    </div>
+
+    <!-- ========== EXTERNAL LINKS ========== -->
+    <h2 id="external-links">External links <span class="mw-editsection">[<a href="#">edit</a>]</span></h2>
+    <ul>
+      <li><a href="https://ayassbioscience.com" class="ext-link">Official website</a></li>
+    </ul>
+
+    <!-- ========== CATEGORIES ========== -->
+    <div class="catlinks">
+      <span class="catlinks-title">Categories:</span>
+      <a href="#">Biotechnology companies of the United States</a><span class="catlinks-sep">|</span>
+      <a href="#">Companies based in Frisco, Texas</a><span class="catlinks-sep">|</span>
+      <a href="#">Health care companies based in Texas</a><span class="catlinks-sep">|</span>
+      <a href="#">Artificial intelligence companies</a><span class="catlinks-sep">|</span>
+      <a href="#">Precision medicine</a><span class="catlinks-sep">|</span>
+      <a href="#">Drug discovery companies</a><span class="catlinks-sep">|</span>
+      <a href="#">Privately held companies based in Texas</a><span class="catlinks-sep">|</span>
+      <a href="#">Clinical laboratories</a>
+    </div>
+
+  </div><!-- /.wiki-content -->
+</div><!-- /.wiki-body -->
+
+<!-- ========== FOOTER ========== -->
+<div class="wiki-footer">
+  <p>Text is available under the <a href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License">Creative Commons Attribution-ShareAlike 4.0 License</a>; additional terms may apply.</p>
+  <p style="margin-top:6px;">Wikipedia&reg; is a registered trademark of the <a href="https://wikimediafoundation.org/">Wikimedia Foundation, Inc.</a></p>
+  <p style="margin-top:6px; color:#a2a9b1;">Privacy policy &middot; About Wikipedia &middot; Disclaimers &middot; Contact Wikipedia &middot; Code of Conduct &middot; Developers &middot; Statistics &middot; Cookie statement</p>
+</div>
+
+</body>
+</html>
